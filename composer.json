@@ -1,0 +1,12 @@
+{
+    "name": "asantiago/snapshots-maker",
+    "authors": [
+        {
+            "name": "Alberto Santiago Chinchilla",
+            "email": "chucho@wetdog.co"
+        }
+    ],
+    "require": {
+        "nesbot/carbon": "^1.21"
+    }
+}

@@ -1,0 +1,21 @@
+#!/bin/bash
+pid=`cat snapshots-server.pid`
+
+refreshDate=`stat -c "%Y" snapshots-maker.pid`
+#43200 -> 12 horas.
+let refreshDate+=43200
+now=`date +"%s"`
+
+if [ "$refreshDate" -lt "$now" ]; then
+    echo "Restarting process..."
+    kill $pid
+fi
+
+if [ ! -e /proc/$pid -a /proc/$pid/exe ]; then
+    php sitemap-maker.php &
+    SERVER_PID=$!
+    echo $SERVER_PID > snapshots-maker.pid
+    echo "Started maker with pid" + $SERVER_PID
+else
+    echo "Maker running already..."
+fi

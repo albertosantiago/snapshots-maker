@@ -1,0 +1,46 @@
+#!/bin/bash
+pid=`cat snapshots-server.pid`
+
+#Cleaning phantom orphan process.
+ps -elf | grep phantomjs | awk '{if ($5 == 1){print $4}}' | xargs kill -9
+
+refreshDate=`stat -c "%Y" snapshots-server.pid`
+#43200 -> 12 horas.
+let refreshDate+=1800
+now=`date +"%s"`
+
+if [ ! -e /proc/$pid -a /proc/$pid/exe ]; then
+    node snapshots-server.js &
+    SERVER_PID=$!
+    echo $SERVER_PID > snapshots-server.pid
+    echo "Started server with pid" + $SERVER_PID
+else
+    echo "Server running already..."
+    echo "Checking live time..."
+    if [ "$refreshDate" -lt "$now" ]; then
+        echo "Old process, restarting..."
+        kill $pid > /dev/null
+        node snapshots-server.js &
+        SERVER_PID=$!
+        echo $SERVER_PID > snapshots-server.pid
+        echo "Started server with pid" + $SERVER_PID
+    fi
+fi
+
+if [ "$refreshDate" -lt "$now" ]; then
+    maxOld=`date +"%s"`
+    #2592000 -> 30 dias.
+    #604800 -> 7 dias
+    let maxOld-=604800
+    echo "Removing file logs older than 7 days..."
+    logs=`ls storage/*.log`
+    for log in $logs
+    do
+       createdAt=`stat -c "%Y" $log`
+       if [ $createdAt -lt $maxOld ]; then
+            echo "Removing $log..."
+            rm $log -f
+            echo "$log removed."
+       fi
+    done
+fi

@@ -1,0 +1,19 @@
+{
+  "name": "snapshots-maker",
+  "version": "1.0.0",
+  "description": "Snapshot maker",
+  "main": "snapshot-maker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cheerio": "^0.20.0"
+  },
+  "dependencies": {
+    "md5": "^2.1.0",
+    "phantom": "^3.2",
+    "sqlite3": "^3.1.4"
+  }
+}

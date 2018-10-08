@@ -1,0 +1,50 @@
+{
+  "env": "local",
+  "local" : {
+      "basePath" : "/var/www/vhosts/snapshots-maker",
+      "dbPath" : "/dev/shm/snapshots.db",
+      "debug" : true,
+      "maxRenderAttemps": 20,
+      "cacheEnabled" : false,
+      "adminServerEnabled": false,
+      "allowedDomains": [
+          "pornolistas.es.local"
+      ]
+  },
+  "testing" : {
+      "basePath" : "/var/opt/snapshots-maker",
+      "dbPath" : "/var/opt/snapshots-maker/storage/snapshots.db",
+      "debug" : false,
+      "maxRenderAttemps": 20,
+      "cacheEnabled" : false,
+      "adminServerEnabled": false,
+      "allowedDomains": [
+          "testing.pornolistas.es"
+      ]
+  },
+  "production" : {
+      "basePath" : "/var/opt/snapshots-maker",
+      "dbPath" : "/var/opt/snapshots-maker/storage/snapshots.db",
+      "debug" : false,
+      "cacheEnabled" : false,
+      "adminServerEnabled": false,
+      "maxRenderAttemps": 20,
+      "allowedDomains": [
+          "pornolistas.es",
+          "pornolistas.com",
+          "pornolijsten.com",
+          "pornolisten.de",
+          "pornlists.net",
+          "omarsex.com",
+          "wetdog.tv",
+          "grannylovers.net",
+          "bondagelove.net",
+          "pornomari.com",
+          "trannylovers.net",
+          "cumshots.space",
+          "asialovers.net",
+          "maturelover.net",
+          "teenagelovers.net"
+      ]
+  }
+}

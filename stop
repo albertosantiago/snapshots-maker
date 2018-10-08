@@ -1,0 +1,4 @@
+#!/bin/bash
+pid=`cat snapshots-server.pid`
+echo "Stoping server..."
+kill $pid
